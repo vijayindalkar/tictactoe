@@ -1,5 +1,6 @@
 // First i will create an enpty array 
 // function to check weather is it empty or not 
+// if empty start
 // function to assign value to position in array e.g [0][0] = 1, [0][1] = 2
 // ask users the position where to put  X and 0 
 // [(0,0)|(0,1)|(0,2)]       [1|2|3]
@@ -31,7 +32,6 @@ function startGameSinglePlayer(){
 
         winArrayX = window.prompt("X' turn | Enter Location : ");
         
-        winArrayO = window.prompt("O' turn | Enter Location : ");
     // for(let i = 0; i < emptyboard.length; i++) {
          
     //      document.write(emptyboard[i] + "<br>");
@@ -51,8 +51,9 @@ function tocheckPattern(){
 
 function startGameMultiplayer(){
     
-     for(let i = 0; i < emptyboard.length; i++) {
-         document.write(emptyboard[i] + "<br>");
+    winArrayX = window.prompt("X' turn | Enter Location : ");
+        
+    winArrayO = window.prompt("O' turn | Enter Location : ");
      }    
     
 }
