@@ -1,0 +1,17 @@
+table#game td {
+  height: 200px;
+  width: 200px;
+  border: solid blueviolet 5px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 60pt;
+}
+
+button#restart {
+  padding: 10px;
+  background-color: white;
+  font-size: 20pt;
+  color: blueviolet;
+  border-radius: 25px;
+}
