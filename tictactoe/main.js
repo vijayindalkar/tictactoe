@@ -21,8 +21,20 @@ var arr = [
     ["-","-","-"],
     ["-","-","-"],
  ]; 
-
-
+// Driver Code
+ function nextStep(){
+    let select = document.getElementById("numberOfPlayers");
+    if(select.options[select.selectedIndex].value == 1){
+        startGameSinglePlayer();
+    }
+    else{
+        startGameMultiplayer();
+    }
+}
+ 
+ 
+ 
+ 
  function dispArr(){
     for(let i = 0; i <=arr.length ; i++) {
             document.write(emptyboard[i] + "<br>");
@@ -92,40 +104,121 @@ function nextTurn(player){
     while(!valid){
         while(position = !["1", "2", "3", "4", "5", "6", "7", "8", "9"])
         position = input("Choose a position from 1-9: ");
+        position = parseInt(position) - 1;
+        if(position  == "-"){    // Check whether Spot is available or not on array 
+        valid = True;       
+        }
+        else{
+            document.write("Place Already taken")
+        }
     }
-    position = parseInt(position) - 1;
-    
+    arr[position] = player;
+    dispArr();
 }
 
-function nextStep(){
-    let select = document.getElementById("numberOfPlayers");
-    if(select.options[select.selectedIndex].value == 1){
-        startGameSinglePlayer();
+function checkIfGameOver(){
+    checkForWinner();
+    checkForTie();
+}
+
+function checkForWinner(){
+    var winner;
+    rowWinner = checkRows();
+    columnWinner = checkColumns();
+    diagonalWinner = checkDiagonals();
+    if (rowWinner) {
+        winner = rowWinner;
+    }
+    else if(columnWinner){
+        winner = columnWinner;
+    }
+    else if (diagonalWinner){
+        winner = diagonalWinner;
     }
     else{
-        startGameMultiplayer();
+        winner = None;
     }
 }
 
-function toAssignInput(){
-// function to assign value to position in array e.g [0][0] = 1, [0][1] = 2
 
 
-}
+function checkRows(){
+    row1 = emptyboard[0][0] == emptyboard[0][1] == emptyboard[0][2] != "-";
+    row2 = emptyboard[1][0] == emptyboard[1][1] == emptyboard[1][2] != "-";
+    row3 = emptyboard[2][0] == emptyboard[2][1] == emptyboard[2][2] != "-";
 
-function tocheckPattern(){
-// function to check a set of pattern every time 
-
-
-}
-
-function checkrows(){
-    row1 = emptyboard[0] == emptyboard[1] == emptyboard[2] != "-";
-    row2 = emptyboard[3] == emptyboard[4] == emptyboard[5] != "-";
-    row3 = emptyboard[6] == emptyboard[7] == emptyboard[8] != "-";
-
-    if(row_1 || row_2 || row_3){
+    if(row1 || row2 || row3){
         gamestillon = False;
     }
+    if(row_1){
+        return arr[0][0];
+    }
+    else if(row2){
+        return arr[1][0];
+    }
+    else if (row3){
+        return arr[1][2];
+    }
+    else{
+        winner = None;
+    }
 
+}
+
+function checkDiagonals(){
+    dig1 = emptyboard[0][0] == emptyboard[1][2] == emptyboard[2][2] != "-";
+    dig2 = emptyboard[0][2] == emptyboard[1][2] == emptyboard[2][1] != "-";
+    
+
+    if(dig1 || dig2 ){
+        gamestillon = False;
+    }
+    if(dig1){
+        return arr[0][0];
+    }
+    else if(dig2){
+        return arr[0][2];
+    }
+    else{
+        winner = None;
+    }
+
+
+}
+
+function checkColumns(){
+    col1 = emptyboard[0][0] == emptyboard[1][0] == emptyboard[2][0] != "-";
+    col2 = emptyboard[0][1] == emptyboard[1][1] == emptyboard[2][1] != "-";
+    col3 = emptyboard[0][2] == emptyboard[1][2] == emptyboard[2][2] != "-";
+
+    if(col1 || col2 || col3){
+        gamestillon = False;
+    }
+    if(col1){
+        return arr[0][0];
+    }
+    else if(col2){
+        return arr[0][1];
+    }
+    else if (col3){
+        return arr[0][2] ;
+    }
+    else{
+        winner = None;
+    }
+}
+
+
+function checkForTie(){
+    var gamestillon;
+}
+
+function flip_player(){
+    var current_player;
+    if (current_player == "X"){
+    current_player = "O";
+    }
+    else if(current_player == "O"){
+        current_player = "X";
+    }
 }
