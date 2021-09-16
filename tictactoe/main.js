@@ -7,6 +7,7 @@
 // [(2,0)|(2,1)|(2,2)]       [7|8|9]
 
 // function to check a set of pattern every time 
+// already Filled position 
 // if the matches the following user Win   otherwise it will tie 
 
 var emptyboard = [
