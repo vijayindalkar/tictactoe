@@ -14,7 +14,7 @@
 
 
 var gameStillOn = true;
-var winner = none;
+var winner = null;
 playerOne = "X"
 var arr = [
     ["-","-","-"],
@@ -45,12 +45,12 @@ var arr = [
 
 
 function isEmpty(){
-    // if (emptyboard == newBoard){
-    //     return true;
-    // }
-    // else{
-    //     return false;
-    // }
+    if (emptyboard == newBoard){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 
@@ -86,7 +86,7 @@ function startGameMultiplayer(){
         if(winner == "X" || winner == "O"){
             document.write(winner + " won.");
         }
-        else if(winner == None){
+        else if(winner == null){
         document.write("Tie.");
         }
 }
@@ -160,7 +160,7 @@ function checkRows(){
         return arr[1][2];
     }
     else{
-        winner = None;
+        winner = Null;
     }
 
 }
@@ -180,7 +180,7 @@ function checkDiagonals(){
         return arr[0][2];
     }
     else{
-        winner = None;
+        winner = Null;
     }
 
 

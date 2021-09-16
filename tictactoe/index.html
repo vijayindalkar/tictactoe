@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="style.css">
         <script src="main.js">
             // function nextStep()
             // {
@@ -9,12 +10,34 @@
         </script>
     </head>
     <body>
-            <label for="quantity">Number of players:</label>
-            <select id="numberOfPlayers">
-                <option value="1">Single Player</option>
-                <option value="2">Multiplayer(2 players)</option>
-            </select>
-                <button onclick="nextStep()">Start</button>
+        <div class="container-out">
+            <div class="container-in">
+            <div class="table-container">
+                <p>Player <span id="player">X</span> your turn</p>
+                <table align="center">
+                <tr>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                    <td><div class="box"></div></td>
+                </tr>
+                </table>
+        
+                <h2 id="message">Player <span id="winner"></span> Wins</h2>
+                <button id="reset">Reset</button>
+            </div>
+            </div>
+        </div>
 
     </body>
-</html>
+</html> -->
+
