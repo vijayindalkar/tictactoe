@@ -1,20 +1,31 @@
-<html>
-    <head>
-        <script src="main.js">
-            // function nextStep()
-            // {
-            //     let select = document.getElementById("numberOfPlayers");
-            //     alert(select.options);
-            // }
-        </script>
-    </head>
-    <body>
-            <label for="quantity">Number of players:</label>
-            <select id="numberOfPlayers">
-                <option value="1">Single Player</option>
-                <option value="2">Multiplayer(2 players)</option>
-            </select>
-                <button onclick="nextStep()">Start</button>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script async defer src="main.js"></script>
+</head>
+<body>
+    <h1 align="center">Tic Tac Toe Game</h1>
+    <h2 align="center">Turn: Player <span id="player">X</span></h2>
+    <div style="text-align: center;"><button id="restart" onclick="restartGame()">RESTART</button></div>
 
-    </body>
+    <table id="game" align="center">
+        <tr>
+            <td onclick="boxClicked(1, 1)"></td>
+            <td onclick="boxClicked(1, 2)"></td>
+            <td onclick="boxClicked(1, 3)"></td>
+        </tr>
+        <tr>
+            <td onclick="boxClicked(2, 1)"></td>
+            <td onclick="boxClicked(2, 2)"></td>
+            <td onclick="boxClicked(2, 3)"></td>
+        </tr>
+        <tr>
+            <td onclick="boxClicked(3, 1)"></td>
+            <td onclick="boxClicked(3, 2)"></td>
+            <td onclick="boxClicked(3, 3)"></td>
+        </tr>
+    </table>
+</body>
 </html>
