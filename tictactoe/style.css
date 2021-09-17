@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container-out {
     font-family: "Fira Sans", sans-serif;
     padding: 15px 0;
@@ -50,3 +51,22 @@
   .table-container button:focus {
     outline: none;
   }
+=======
+table#game td {
+  height: 200px;
+  width: 200px;
+  border: solid blueviolet 5px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 60pt;
+}
+
+button#restart {
+  padding: 10px;
+  background-color: white;
+  font-size: 20pt;
+  color: blueviolet;
+  border-radius: 25px;
+}
+>>>>>>> 232fb56f31ce1f418bcf947901c285751937462c
