@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body onload="startGame();">
+    <h1 id="title">Tic Tac Toe</h1>
+
+    <div id="message">MESSAGE HERE</div>
+
+    
+    <table id="gameboard">
+        <tr>
+            <td class="square" id="s1" onClick="nextMove(this)"></td>
+            <td class="square" id="s2" onClick="nextMove(this)"></td>
+            <td class="square" id="s3" onClick="nextMove(this)"></td>
+        </tr>
+        <tr>
+            <td class="square" id="s4" onClick="nextMove(this)"></td>
+            <td class="square" id="s5" onClick="nextMove(this)"></td>
+            <td class="square" id="s6" onClick="nextMove(this)"></td>
+        </tr>
+        <tr>
+            <td class="square" id="s7" onClick="nextMove(this)"></td>
+            <td class="square" id="s8" onClick="nextMove(this)"></td>
+            <td class="square" id="s9" onClick="nextMove(this)"></td>
+        </tr>
+    </table>
+    <script src="start.js"></script>
+    <a href="javascript: startGame();" id="restart">New Game</a>
+    <a href="multiplayer.html   " id="multiplayerGame">Multiplayer</a>
+</body>
+
+</html>
