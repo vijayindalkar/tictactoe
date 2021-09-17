@@ -1,224 +1,104 @@
-// First i will create an enpty array 
-// function to check weather is it empty or not 
-// if empty start
-// function to assign value to position in array e.g [0][0] = 1, [0][1] = 2
-// ask users the position where to put  X and 0 
-// [(0,0)|(0,1)|(0,2)]       [1|2|3]
-// [(1,0)|(1,1)|(1,2)]       [4|5|6]  user input will be 1,2,3.....
-// [(2,0)|(2,1)|(2,2)]       [7|8|9]
-// function to show the board as we will show the board multiple times to the users while they are playing.
-// function to check a set of pattern every time 
-// already Filled position (again ask user to another posi)
-// if the matches the following user Win   otherwise it will tie 
+var player1 = "X";
+var player2 = "O";
+var currentTurn = player1;
 
+function startGame() {
 
-
-var gameStillOn = true;
-var winner = null;
-playerOne = "X"
-var arr = [
-    ["-","-","-"],
-    ["-","-","-"],
-    ["-","-","-"],
- ]; 
-// Driver Code
- function nextStep(){
-    let select = document.getElementById("numberOfPlayers");
-    if(select.options[select.selectedIndex].value == 1){
-        startGameSinglePlayer();
+    for (var i = 1; i <= 9; i++) {
+        clearBoard(i);
     }
-    else{
-        startGameMultiplayer();
-    }
+
+    document.winner = null;
+    setMessage("Player " + currentTurn + ", please start the game.");
 }
- 
- 
- 
- 
- function dispArr(){
-    for(let i = 0; i <=arr.length ; i++) {
-            document.write(emptyboard[i] + "<br>");
-        }
- }
 
+function setMessage(message) {
+    document.getElementById("message").innerText = message;
+}
 
-
-
-function isEmpty(){
-    if (emptyboard == newBoard){
-        return true;
-    }
-    else{
-        return false;
+function nextMove(square) {
+    if (document.winner != null) {
+        setMessage(currentTurn + " has already won.");
+    } else if (square.innerText == '') {
+        square.innerText = currentTurn;
+        swapTurn();
+    } else {
+        setMessage("No cheating, choose another square.");
     }
 }
 
-
-function startGameSinglePlayer(){
-    // for(let posi = 0;posi <= 9;posi++){
-
-    //     winArrayX.push(window.prompt("X' turn | Enter Location : "));
-        
-    // for(let i = 0; i < emptyboard.length; i++) {
-         
-    //      document.write(emptyboard[i] + "<br>");
-    //  }
-}
-
-
-
-
-function startGameMultiplayer(){
-    
-    // winArrayX.push(window.prompt("X' turn | Enter Location : "));  
-    // winArrayO.push(window.prompt("O' turn | Enter Location : "));
-    
-    // for(let i = 0; i <=9 ; i++) {
-        
-    //     document.write(emptyboard[i] + "<br>");
-    // } 
-
-    dispArr();
-    while(gameStillOn){
-        nextTurn(current_player);
-        checkGameStatus();
-        changePlayer();
-        if(winner == "X" || winner == "O"){
-            document.write(winner + " won.");
-        }
-        else if(winner == null){
-        document.write("Tie.");
-        }
-}
-
-
-}   //end of startmultiplayerGame 
-
-
-
-
-function nextTurn(player){
-    document.write(player + "'s turn.")
-    var position = window.prompt("Choose a position from 1-9: ");
-    var valid = False;
-    while(!valid){
-        while(position = !["1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        position = input("Choose a position from 1-9: ");
-        position = parseInt(position) - 1;
-        if(position  == "-"){    // Check whether Spot is available or not on array 
-        valid = True;       
-        }
-        else{
-            document.write("Place Already taken")
-        }
-    }
-    arr[position] = player;
-    dispArr();
-}
-
-function checkIfGameOver(){
-    checkForWinner();
-    checkForTie();
-}
-
-function checkForWinner(){
-    var winner;
-    rowWinner = checkRows();
-    columnWinner = checkColumns();
-    diagonalWinner = checkDiagonals();
-    if (rowWinner) {
-        winner = rowWinner;
-    }
-    else if(columnWinner){
-        winner = columnWinner;
-    }
-    else if (diagonalWinner){
-        winner = diagonalWinner;
-    }
-    else{
-        winner = None;
+function swapTurn() {
+    if (checkForWinner(currentTurn)) {
+        setMessage(currentTurn + " has won!");
+        document.winner = currentTurn;
+    } else if (checkForDraw(currentTurn)) {
+        setMessage("Its a draw!");
+    } else if (currentTurn == player1) {
+        currentTurn = player2;
+        setMessage("Player " + currentTurn + ", it's your turn.");
+        player2Move();
+    } else {
+        currentTurn = player1;
+        setMessage("Player " + currentTurn + ", it's your turn.");
     }
 }
 
-
-
-function checkRows(){
-    row1 = emptyboard[0][0] == emptyboard[0][1] == emptyboard[0][2] != "-";
-    row2 = emptyboard[1][0] == emptyboard[1][1] == emptyboard[1][2] != "-";
-    row3 = emptyboard[2][0] == emptyboard[2][1] == emptyboard[2][2] != "-";
-
-    if(row1 || row2 || row3){
-        gamestillon = False;
+function checkForWinner(move) {
+    var result = false;
+    if (checkRow(1, 2, 3, move) ||
+        checkRow(4, 5, 6, move) ||
+        checkRow(7, 8, 9, move) ||
+        checkRow(1, 4, 7, move) ||
+        checkRow(2, 5, 8, move) ||
+        checkRow(3, 6, 9, move) ||
+        checkRow(1, 5, 9, move) ||
+        checkRow(3, 5, 7, move)) {
+        result = true;
     }
-    if(row_1){
-        return arr[0][0];
-    }
-    else if(row2){
-        return arr[1][0];
-    }
-    else if (row3){
-        return arr[1][2];
-    }
-    else{
-        winner = Null;
-    }
-
+    return result;
 }
 
-function checkDiagonals(){
-    dig1 = emptyboard[0][0] == emptyboard[1][2] == emptyboard[2][2] != "-";
-    dig2 = emptyboard[0][2] == emptyboard[1][2] == emptyboard[2][1] != "-";
-    
-
-    if(dig1 || dig2 ){
-        gamestillon = False;
+function checkForDraw(move) {
+    var draw = false;
+    if (((getBox(1) == "X") || (getBox(1) == "O")) &&
+        ((getBox(2) == "X") || (getBox(2) == "O")) &&
+        ((getBox(3) == "X") || (getBox(3) == "O")) &&
+        ((getBox(4) == "X") || (getBox(4) == "O")) &&
+        ((getBox(5) == "X") || (getBox(5) == "O")) &&
+        ((getBox(6) == "X") || (getBox(6) == "O")) &&
+        ((getBox(7) == "X") || (getBox(7) == "O")) &&
+        ((getBox(8) == "X") || (getBox(8) == "O")) &&
+        ((getBox(9) == "X") || (getBox(9) == "O"))) {
+        draw = true;
     }
-    if(dig1){
-        return arr[0][0];
-    }
-    else if(dig2){
-        return arr[0][2];
-    }
-    else{
-        winner = Null;
-    }
-
-
+    return draw;
 }
 
-function checkColumns(){
-    col1 = emptyboard[0][0] == emptyboard[1][0] == emptyboard[2][0] != "-";
-    col2 = emptyboard[0][1] == emptyboard[1][1] == emptyboard[2][1] != "-";
-    col3 = emptyboard[0][2] == emptyboard[1][2] == emptyboard[2][2] != "-";
-
-    if(col1 || col2 || col3){
-        gamestillon = False;
+function checkRow(a, b, c, move) {
+    var result = false;
+    if (getBox(a) == move && getBox(b) == move && getBox(c) == move) {
+        result = true;
     }
-    if(col1){
-        return arr[0][0];
-    }
-    else if(col2){
-        return arr[0][1];
-    }
-    else if (col3){
-        return arr[0][2] ;
-    }
-    else{
-        winner = None;
-    }
+    return result;
 }
 
-
-function checkForTie(){
-    var gamestillon;
+function getBox(number) {
+    return document.getElementById("s" + number).innerText;
 }
 
-function flip_player(){
-    var current_player;
-    if (current_player == "X"){
-    current_player = "O";
+function clearBoard(number) {
+    document.getElementById("s" + number).innerText = "";
+}
+
+function player2Move() {
+
+    var blanks = [];
+    for (var i = 1; i <= 9; i++) {
+        var place = document.getElementById("s" + i).innerText
+        if (place == "") blanks.push([i]);
     }
-    else if(current_player == "O"){
-        current_player = "X";
+    if (blanks.length > 0) {
+        var r = Math.floor((Math.random() * blanks.length));
+        nextMove(document.getElementById("s" + blanks[r]));
     }
 }
