@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script>
+        var player1 = "X";
+        var player2 = "O";
+        var currentTurn = player1;
+
+        function startGame() {
+
+            for (var i = 1; i <= 9; i++) {
+                clearBoard(i);
+            }
+
+            document.winner = null;
+            setMessage("Player " + currentTurn + ", please start the game.");
+        }
+
+        function setMessage(message) {
+            document.getElementById("message").innerText = message;
+        }
+
+        function nextMove(square) {
+            if (document.winner != null) {
+                setMessage(currentTurn + " has already won.");
+            } else if (square.innerText == '') {
+                square.innerText = currentTurn;
+                swapTurn();
+            } else {
+                setMessage("No cheating, choose another square.");
+            }
+        }
+
+        function swapTurn() {
+            if (checkForWinner(currentTurn)) {
+                setMessage(currentTurn + " has won!");
+                document.winner = currentTurn;
+            } else if (checkForDraw(currentTurn)) {
+                setMessage("Its a draw!");
+            } else if (currentTurn == player1) {
+                currentTurn = player2;
+                setMessage("Player " + currentTurn + ", it's your turn.");
+                player2Move();
+            } else {
+                currentTurn = player1;
+                setMessage("Player " + currentTurn + ", it's your turn.");
+            }
+        }
+
+        function checkForWinner(move) {
+            var result = false;
+            if (checkRow(1, 2, 3, move) ||
+                checkRow(4, 5, 6, move) ||
+                checkRow(7, 8, 9, move) ||
+                checkRow(1, 4, 7, move) ||
+                checkRow(2, 5, 8, move) ||
+                checkRow(3, 6, 9, move) ||
+                checkRow(1, 5, 9, move) ||
+                checkRow(3, 5, 7, move)) {
+                result = true;
+            }
+            return result;
+        }
+
+        function checkForDraw(move) {
+            var draw = false;
+            if (((getBox(1) == "X") || (getBox(1) == "O")) &&
+                ((getBox(2) == "X") || (getBox(2) == "O")) &&
+                ((getBox(3) == "X") || (getBox(3) == "O")) &&
+                ((getBox(4) == "X") || (getBox(4) == "O")) &&
+                ((getBox(5) == "X") || (getBox(5) == "O")) &&
+                ((getBox(6) == "X") || (getBox(6) == "O")) &&
+                ((getBox(7) == "X") || (getBox(7) == "O")) &&
+                ((getBox(8) == "X") || (getBox(8) == "O")) &&
+                ((getBox(9) == "X") || (getBox(9) == "O"))) {
+                draw = true;
+            }
+            return draw;
+        }
+
+        function checkRow(a, b, c, move) {
+            var result = false;
+            if (getBox(a) == move && getBox(b) == move && getBox(c) == move) {
+                result = true;
+            }
+            return result;
+        }
+
+        function getBox(number) {
+            return document.getElementById("s" + number).innerText;
+        }
+
+        function clearBoard(number) {
+            document.getElementById("s" + number).innerText = "";
+        }
+    </script>
+</head>
+
+<body onload="startGame();">
+    <h1 id="title">Tic Tac Toe</h1>
+
+    <div id="message">MESSAGE HERE</div>
+    
+    <table id="gameboard">
+        <tr>
+            <td class="square" id="s1" onClick="nextMove(this)"></td>
+            <td class="square" id="s2" onClick="nextMove(this)"></td>
+            <td class="square" id="s3" onClick="nextMove(this)"></td>
+        </tr>
+        <tr>
+            <td class="square" id="s4" onClick="nextMove(this)"></td>
+            <td class="square" id="s5" onClick="nextMove(this)"></td>
+            <td class="square" id="s6" onClick="nextMove(this)"></td>
+        </tr>
+        <tr>
+            <td class="square" id="s7" onClick="nextMove(this)"></td>
+            <td class="square" id="s8" onClick="nextMove(this)"></td>
+            <td class="square" id="s9" onClick="nextMove(this)"></td>
+        </tr>
+    </table>
+        <a href="javascript: startGame();" id="restart">New Game</a>
+        <a href="singlePlayer.html" id="singlePlayergame">Play with Computer</a>
+</body>
+
+</html>
